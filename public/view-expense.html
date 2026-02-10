@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Expenses</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">
+        <span class="logo-icon">💰</span> Moneyfy
+    </h2>
+</div>
+
+<div class="right" style="margin:100px auto; width:500px;">
+    <h2>All Expenses</h2>
+
+    <table class="expense-table" id="expenseTable">
+
+        <tr>
+            <th>Expense Name</th>
+            <th>Amount</th>
+        </tr>
+        <!-- rows will come here -->
+    </table>
+</div>
+<script>
+fetch("/expenses")
+.then(response => response.json())
+.then(data => {
+    const table = document.getElementById("expenseTable");
+
+    data.forEach(expense => {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = expense.title;
+        row.insertCell(1).innerText = expense.amount;
+    });
+});
+</script>
+
+</body>
+</html>

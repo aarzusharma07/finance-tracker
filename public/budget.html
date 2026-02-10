@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Tracking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">💰 Moneyfy</h2>
+</div>
+
+<div class="summary-card">
+    <h2>Monthly Budget</h2>
+
+    <form action="/set-budget" method="POST">
+        <input type="number" name="amount" placeholder="Enter budget amount" required>
+        <button>Set Budget</button>
+    </form>
+
+    <hr style="margin:20px 0">
+
+    <p>Budget: ₹<span id="budget">0</span></p>
+    <p>Spent: ₹<span id="spent">0</span></p>
+    <p id="status"></p>
+</div>
+
+<script>
+fetch("/budget/status")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("budget").innerText = data.budget;
+    document.getElementById("spent").innerText = data.spent;
+
+    const status = document.getElementById("status");
+    if (data.remaining >= 0) {
+        status.innerText = "Remaining: ₹" + data.remaining;
+        status.style.color = "green";
+    } else {
+        status.innerText = "Over budget by ₹" + Math.abs(data.remaining);
+        status.style.color = "red";
+    }
+});
+</script>
+
+</body>
+</html>

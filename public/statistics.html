@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics - Moneyfy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">💰 Moneyfy</h2>
+</div>
+
+<div class="stats-container">
+
+    <div class="stats-cards">
+        <div class="stat-card">
+            <h4>Income</h4>
+            <p id="income">₹0</p>
+        </div>
+        <div class="stat-card">
+            <h4>Expense</h4>
+            <p id="expense">₹0</p>
+        </div>
+        <div class="stat-card">
+            <h4>Balance</h4>
+            <p id="balance">₹0</p>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>Saved vs Spent</h3>
+        <canvas id="donutChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h3>Category Spending</h3>
+        <canvas id="categoryChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h3>Add Transaction</h3>
+        <form action="/add-expense" method="POST">
+            <input name="title" placeholder="Title" required>
+            <input name="amount" type="number" placeholder="Amount" required>
+
+            <select name="type">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
+
+            <input name="category" placeholder="Category (Food, Travel)">
+            <button>Add</button>
+        </form>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="statistics.js"></script>
+
+</body>
+</html>

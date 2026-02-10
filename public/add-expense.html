@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">
+        <span class="logo-icon">💰</span> Moneyfy
+    </h2>
+</div>
+
+<div class="right" style="margin: 100px auto;">
+    <h2>Add Expense</h2>
+
+    <form action="/add-expense" method="POST">
+        <input class="field" type="text" name="title" placeholder="Expense Title" required>
+        <input class="field" type="number" name="amount" placeholder="Amount" required>
+
+        <button class="register-btn" type="submit">Add Expense</button>
+    </form>
+</div>
+
+</body>
+</html>

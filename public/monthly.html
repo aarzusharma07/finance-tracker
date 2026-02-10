@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Transactions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">💰 Moneyfy</h2>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+    <span class="active">Monthly</span>
+    <span onclick="location.href='weekly.html'">Weekly</span>
+</div>
+
+<!-- Summary -->
+<div class="summary">
+    <div>
+        <p>Income</p>
+        <h3 id="income">₹0</h3>
+    </div>
+    <div>
+        <p>Expenses</p>
+        <h3 id="expense">₹0</h3>
+    </div>
+    <div>
+        <p>Total</p>
+        <h3 id="total">₹0</h3>
+    </div>
+</div>
+
+<!-- Transactions -->
+<div id="transactionList"></div>
+
+<script>
+fetch("/transactions/monthly")
+.then(res => res.json())
+.then(data => {
+
+    // top summary
+    document.getElementById("income").innerText = "₹" + data.income;
+    document.getElementById("expense").innerText = "₹" + data.expense;
+    document.getElementById("total").innerText = "₹" + data.total;
+
+    const container = document.getElementById("transactionList");
+    container.innerHTML = "";
+
+    const grouped = {};
+
+    // group by date
+    data.transactions.forEach(t => {
+        const key = new Date(t.date).toDateString();
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(t);
+    });
+
+    // render grouped list
+    Object.keys(grouped).forEach(date => {
+        const dateHeader = document.createElement("div");
+        dateHeader.className = "date-group";
+        dateHeader.innerText = date;
+        container.appendChild(dateHeader);
+
+        grouped[date].forEach(t => {
+            const row = document.createElement("div");
+            row.className = "transaction-item";
+            row.innerHTML = `
+                <span>${t.title}</span>
+                <span style="color:${t.type === "income" ? "green" : "red"}">
+                    ₹${t.amount}
+                </span>
+            `;
+            container.appendChild(row);
+        });
+    });
+});
+</script>
+
+</body>
+</html>

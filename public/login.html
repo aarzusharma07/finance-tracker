@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Moneyfy - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2 class="logo">
+        <span class="logo-icon">💰</span> Moneyfy
+    </h2>
+
+</div>
+
+<!-- Main container -->
+<div class="container">
+
+    <!-- Left text -->
+    <div class="left">
+        <h1>Welcome back</h1>
+        <p>
+            Login to manage your expenses, track budgets,
+            and stay in control of your finances.
+        </p>
+    </div>
+
+    <!-- Login card -->
+    <div class="right">
+        <h2>Login</h2>
+
+   <form action="/login" method="POST">
+
+           <input class="field" type="email" name="email" placeholder="Email Address" required>
+<input class="field" type="password" name="password" placeholder="Password" required>
+
+
+            <button class="register-btn" type="submit">Login</button>
+        </form>
+
+        <p class="login-link">
+            Don’t have an account?
+            <a href="register.html">Register</a>
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

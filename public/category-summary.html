@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category Summary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">
+        <span class="logo-icon">💰</span> Moneyfy
+    </h2>
+</div>
+
+<div class="right" style="margin:80px auto; width:420px;">
+    <h2>Category Summary</h2>
+
+    <table class="expense-table" id="categoryTable">
+        <tr>
+            <th>Category</th>
+            <th>Total Amount (₹)</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+fetch("/summary/category")
+.then(res => res.json())
+.then(data => {
+    const table = document.getElementById("categoryTable");
+
+    for (let category in data) {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = category;
+        row.insertCell(1).innerText = data[category];
+    }
+});
+</script>
+
+</body>
+</html>
